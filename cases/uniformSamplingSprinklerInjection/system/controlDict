@@ -65,7 +65,7 @@ functions
      partialWrite
      {
          type            partialWrite;
-         functionObjectLibs ("libIOFunctionObjects.so");
+         //functionObjectLibs ("libIOFunctionObjects.so");
          outputControl   outputTime;
          objectNames    (U active age d positions);   // write specified objects every outputTime
          writeInterval   1;      // write all objects every writeInterval
@@ -249,7 +249,7 @@ functions
     fieldAverage1
     {
         type            fieldAverage;
-        functionObjectLibs ( "libfieldFunctionObjects.so" );
+        // functionObjectLibs ( "libfieldFunctionObjects.so" );
         enabled         true;
         resetOnOutput   false;
         resetOnRestart  true;

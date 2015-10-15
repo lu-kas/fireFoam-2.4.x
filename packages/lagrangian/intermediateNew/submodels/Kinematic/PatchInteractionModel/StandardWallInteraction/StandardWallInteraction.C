@@ -2,7 +2,7 @@
   =========                 |
   \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
    \\    /   O peration     |
-    \\  /    A nd           | Copyright (C) 2011-2012 OpenFOAM Foundation
+    \\  /    A nd           | Copyright (C) 2011-2013 OpenFOAM Foundation
      \\/     M anipulation  |
 -------------------------------------------------------------------------------
 License
@@ -57,7 +57,7 @@ Foam::StandardWallInteraction<CloudType>::StandardWallInteraction
                 "StandardWallInteraction<CloudType>::StandardWallInteraction"
                 "("
                     "const dictionary&, "
-                    "CloudType& cloud"
+                    "CloudType&"
                 ")"
             )   << "Unknown interaction result type "
                 << interactionTypeName
@@ -126,10 +126,13 @@ bool Foam::StandardWallInteraction<CloudType>::correct
         {
             case PatchInteractionModel<CloudType>::itEscape:
             {
+                scalar dm = p.mass()*p.nParticle();
+
                 keepParticle = false;
                 active = false;
                 U = vector::zero;
                 nEscape_++;
+                massEscape_ += dm;
                 break;
             }
             case PatchInteractionModel<CloudType>::itStick:
@@ -174,10 +177,11 @@ bool Foam::StandardWallInteraction<CloudType>::correct
                 (
                     "bool StandardWallInteraction<CloudType>::correct"
                     "("
+                        "typename CloudType::parcelType&, "
                         "const polyPatch&, "
-                        "const label, "
-                        "bool&, "
-                        "vector&"
+                        "bool& keepParticle, "
+                        "const scalar, "
+                        "const tetIndices&"
                     ") const"
                 )   << "Unknown interaction type "
                     << this->interactionTypeToWord(interactionType_)
@@ -215,16 +219,16 @@ void Foam::StandardWallInteraction<CloudType>::info(Ostream& os)
     if (this->outputTime())
     {
         this->setModelProperty("nEscape", npe);
-        nEscape_ = 0;
+        // nEscape_ = 0;
 
         this->setModelProperty("massEscape", mpe);
-        massEscape_ = 0.0;
+        // massEscape_ = 0.0;
 
         this->setModelProperty("nStick", nps);
-        nStick_ = 0;
+        // nStick_ = 0;
 
         this->setModelProperty("massStick", mps);
-        massStick_ = 0.0;
+        // massStick_ = 0.0;
     }
 }
 

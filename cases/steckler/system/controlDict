@@ -57,7 +57,7 @@ maxDeltaT       0.1;
 
 libs
 (
-    "libfvPatchFieldsPyrolysis.so"
+    //"libfvPatchFieldsPyrolysis.so"
 );
 
 functions
@@ -66,7 +66,7 @@ functions
     HRR
     {
         type            cellSource;
-        functionObjectLibs ("libfieldFunctionObjects.so");
+        //functionObjectLibs ("libfieldFunctionObjects.so");
         enabled         true;
         outputControl   timeStep;  //outputTime;
         outputInterval  1;
@@ -84,7 +84,7 @@ functions
     fieldMinMax
     {
         type            fieldMinMax;
-        functionObjectLibs ("libfieldFunctionObjects.so");
+        //functionObjectLibs ("libfieldFunctionObjects.so");
         enabled         true;
         outputControl   timeStep;
         outputInterval  1;
