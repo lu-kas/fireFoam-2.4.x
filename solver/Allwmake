@@ -2,7 +2,8 @@
 cd ${0%/*} || exit 1    # run from this directory
 set -x
 
-./installVersion.sh
+#LA removed due to write perimissions
+# ./installVersion.sh
 
 wmake
 
